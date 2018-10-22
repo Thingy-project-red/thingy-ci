@@ -1,0 +1,19 @@
+{
+  "name": "thingy-ci",
+  "version": "1.0.0",
+  "description": "Pseudo CI for pulling changes and updating a running Docker service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thingy-project-red/thingy-ci.git"
+  },
+  "author": "various",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Thingy-project-red/thingy-ci/issues"
+  },
+  "homepage": "https://github.com/Thingy-project-red/thingy-ci#readme"
+}
