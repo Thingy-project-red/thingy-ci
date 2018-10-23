@@ -19,10 +19,9 @@
   },
   "homepage": "https://github.com/Thingy-project-red/thingy-ci#readme",
   "dependencies": {
-    "docker-compose": "^0.9.1",
+    "await-exec": "^0.1.2",
     "dotenv": "^6.1.0",
-    "github-webhook-handler": "^0.7.1",
-    "simple-git": "^1.105.0"
+    "github-webhook-handler": "^0.7.1"
   },
   "devDependencies": {
     "eslint": "^5.7.0",
