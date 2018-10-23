@@ -10,8 +10,8 @@ async function sendTelegram(message) {
   // Only send message if Telegram is configured
   if (process.env.CI_TG_KEY && process.env.CI_TG_CHAT) {
     console.log('Informing user on Telegram');
-    const uri =
-      `https://api.telegram.org/bot${process.env.CI_TG_KEY}/sendMessage`;
+    const apikey = process.env.CI_TG_KEY;
+    const uri = `https://api.telegram.org/bot${apikey}/sendMessage`;
     await request({
       method: 'POST',
       uri,
