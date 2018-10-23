@@ -4,6 +4,22 @@ const webhook = require('github-webhook-handler')({
   path: '/', secret: process.env.CI_SECRET
 });
 const exec = require('await-exec');
+const request = require('request-promise-native');
+
+async function sendTelegram(message) {
+  // Only send message if Telegram is configured
+  if (process.env.CI_TG_KEY && process.env.CI_TG_CHAT) {
+    console.log('Informing user on Telegram');
+    const uri =
+      `https://api.telegram.org/bot${process.env.CI_TG_KEY}/sendMessage`;
+    await request({
+      method: 'POST',
+      uri,
+      body: { chat_id: process.env.CI_TG_CHAT, text: message },
+      json: true
+    });
+  }
+}
 
 http.createServer((req, res) => {
   webhook(req, res, () => {
@@ -36,8 +52,12 @@ webhook.on('push', async (event) => {
       await exec(`cd ${process.env.CI_DIR} && docker-compose up -d --build`);
 
       console.log('New version deployed successfully');
+      // All went well, try to send Telegram message
+      await sendTelegram('New version deployed');
     } catch (err) {
       console.error(`Unable to deploy\n${err.stderr}`);
+      // There was a problem, send stderr on Telegram
+      await sendTelegram(`Unable to deploy\n${err.stderr}`);
     }
   }
 });
